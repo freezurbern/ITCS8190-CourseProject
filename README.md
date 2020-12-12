@@ -1,4 +1,49 @@
-## Welcome to GitHub Pages
+# Predicting Urban Growth on Apache Spark
+## Using population, road density, and land cover
+
+## Overview
+### Context
+### Interesting
+
+
+## Data sources
+
+## Data Pipeline / Tasks
+
+## Approach
+### Algorithms
+### Frameworks
+### External tools and packages
+
+## Steps Implemented
+
+## Results
+### Map
+
+## Performance Evaluation
+
+## Aspects Accomplished
+### Definitely will do
+### Likely will do
+### Would ideally like to do
+
+## Challenges
+## Lessons Learned
+
+## References
+
+## Code README
+
+
+
+
+
+
+
+
+
+---
+---
 
 You can use the [editor on GitHub](https://github.com/freezurbern/ITCS8190-CourseProject/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
 
