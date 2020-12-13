@@ -64,19 +64,20 @@ Prediction map here
 ## Definitely will do
 :heavy_check_mark: **Loading my data into Apache Spark**
  
-:white_check_mark: **Use the South East region of the United States**
+:heavy_check_mark: **Use the South East region of the United States**
 
-:white_check_mark: **Implementing multiple linear regression in Apache Spark**
+:heavy_check_mark: **Implementing multiple linear regression in Apache Spark**
 
-:white_check_mark: **Train a model**
+:heavy_check_mark: **Train a model**
 
-:white_check_mark: **Predict urban growth**
+:heavy_check_mark: **Predict urban growth**
 
-:white_check_mark: **Export and map the predicted urban growth**
+:heavy_check_mark: **Export and map the predicted urban growth**
 
 ## Likely will do
 :x:	**Use data across the entire United States**
- 
+  * I did not accomplish this likely goal due to pre-processing time associated with road density. Calculating density for the southeastern United States took atleast 30 minutes depending on which machine was running the R code. With more time, I believe I could expand my analysis.
+
 ## Would ideally like to do
 :x:	**Import my datasets directly into spark without preprocessing in R or ArcGIS Pro**
   * I did not accomplish this stretch-goal because Apache Spark does not have native support for raster image data, and my knowledge of the platform is not yet advanced enough to implement this myself.
