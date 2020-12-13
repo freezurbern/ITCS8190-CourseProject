@@ -39,6 +39,7 @@
 6. Upload data to Hadoop HDFS
    * ```freezurbern@cluster-95c6-m:/home/ubuntu$ hadoop fs -put lcpr2011.csv /user/root/lcpr2011.csv```
    * ```freezurbern@cluster-95c6-m:/home/ubuntu$ hadoop fs -put lcpr2013.csv /user/root/lcpr2013.csv```
+   * For Google Dataproc, upload the files following: https://cloud.google.com/compute/docs/instances/transfer-files?hl=en#transferbrowser
 
 # Apache Spark - Steps Implemented
 1. Data Loading
