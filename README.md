@@ -36,6 +36,9 @@
 4. Write population and road densities to CSV
 5. Test Linear Regression in R
    1. By suggestion of the instructor, it was very useful to have known-valid values to validate my implementation later in Apache Spark.
+6. Upload data to Hadoop HDFS
+   * ```freezurbern@cluster-95c6-m:/home/ubuntu$ hadoop fs -put lcpr2011.csv /user/root/lcpr2011.csv```
+   * ```freezurbern@cluster-95c6-m:/home/ubuntu$ hadoop fs -put lcpr2013.csv /user/root/lcpr2013.csv```
 
 # Apache Spark - Steps Implemented
 1. Data Loading
