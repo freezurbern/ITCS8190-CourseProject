@@ -1,13 +1,29 @@
-- EXAMPLE MAP HERE
+TODO EXAMPLE MAP HERE
+
 # Overview
 
-## Context
 
-## Interesting
+* **Context**
+I chose to use my course project as an opportunity to learn more about Apache Spark and statistics and their interaction with geospatial research. I am a Ph.D. student in the Department of Geography at UNC Charlotte taking an advanced computer science course (ITCS 8190) because I want to bring computer science methods to Geographic Information Science (GIS). My background before GIS was web development as a computer science undergraduate at UNC Charlotte. I felt this project would be an easy introduction to the intersection of cloud computing and GIS, but was surprised and overwhelmed by the complexity involved. While I have learned a weighty tome of information about cloud computing this semester, I still have a lot of work ahead to understand the entire scope of this exciting topic.
+
+* **Interesting**
+The most interesting aspect of this project is the distributed training and prediction of a multiple linear regression model using Apache Spark. Also of interest is the data preparation incorporating land cover and demographic data. 
 
 # Approach
-## Algorithms
-#### Multiple Linear Regression
+In this course project, I used multiple linear regression to model urban growth. The model formula is:
+```
+Urban = Beta_0 + Beta_1*roadDens + Beta_2*popDens + Beta_3*barren + Beta_4*water + Beta_5*nature + Beta_6*agric
+Where
+  Urban  = Dependent variable, percent of census tract's land cover urban
+  Beta_0 = Y-intercept coefficient
+  Beta_{1..6} = Coefficients
+  roadDens = (Length of roads in meters / area of tract in square meters)
+  popDens = (ACS Estimated population / area of tract in square meters)
+  barren = (NLCD Barren landcover pixels / total pixels in census tract)
+  water = (NLCD Open Water landcover pixels / total pixels in census tract)
+  nature = ((Forest + Shrub + Grassland + Wetlands) landcover pixels / total pixels in census tract)
+  agric = ((Pasture + Crops) landcover pixels / total pixels in census tract)
+```
 
 ## Frameworks
 I used the Google Cloud Platform's Dataproc service to host a Hadoop cluster. This service has 
@@ -45,9 +61,20 @@ for cluster VM nodes. I chose Dataproc 1.5, which includes Ubuntu 18.04 LTS, Had
 
 # Apache Spark - Steps Implemented
 1. Data Loading
-2. Data Joining
-3. Data 
-
+   1. After uploading to HDFS, using spark to read CSV
+   2. Cleanup data columns and rename
+3. Compute multiple linear regression coefficients
+   1. Based on my Assignment 2 code
+   2. Store the coefficients on HDFS for later use
+2. Distributed prediction
+   1. Loading new data from HDFS
+   2. Loading coefficients from HDFS
+   3. Adding coefficients as columns
+   4. Computing dependent variable
+3. Data Export
+   1. Saving computed prediction to HDFS
+4. Searching and Plotting
+   1. TODO
 
 ## External tools and packages
 In this project, I further developed my knowledge of R to create my data pipeline. I chose R for this task because I am using it in another course this semester, and there are two very convienent packages authored by Kyle Walker:
@@ -57,7 +84,7 @@ These packages were instrumental in gathering Census data. Tidycensus is a conve
 Another software essential to this project was ESRI's ArcGIS Pro. I used ArcGIS to tabulate raster image pixels by census tracts. This converted raster image data to counts of pixels as a CSV file.
 
 # Results
-Prediction map here
+TODO Prediction map here
 
 # Performance Evaluation
 I evaluated the performance of my linear regression model first by manually calculating a prediction:
@@ -85,12 +112,12 @@ print(calc - ex_y)
 The result of this calculation is approximately +0.005, which shows my model overestimates the percent-urban by 0.5%. I find this result adequate but not inspiring, because 0.05% of a census tract (average size in my dataset is 2,436 acres) is **121 acres**. 
 
 - RMSE?
-- Input data again?
 - Map visual inspection?
 - Matching census urban areas?
 
 # Aspects Desired
 ## Definitely will do
+
 :heavy_check_mark: **Loading my data into Apache Spark**
  
 :heavy_check_mark: **Use the South East region of the United States**
@@ -112,11 +139,14 @@ The result of this calculation is approximately +0.005, which shows my model ove
   * I did not accomplish this stretch-goal because Apache Spark does not have native support for raster image data, and my knowledge of the platform is not yet advanced enough to implement this myself.
 
 ## Unexpected accomplishments
+:heavy_check_mark: **Distributed prediction using Spark DataFrames**
+
 :heavy_check_mark: **Running my code on a Google Cloud Platform cluster**
 
 :heavy_check_mark: **Loading data from a Google Cloud Storage Bucket**
 
 :heavy_check_mark: **Documenting projects on GitHub Pages**
+
 
 
 
@@ -128,7 +158,10 @@ Here I will briefly describe the challenges encountered during this project.
    - My second error in my project proposal was defining my research question and approach. I intended to implement logistic regression on Apache Spark to determine whether an area had experienced urban growth or not. After digging into the datasets, I found my urban variable was continuous between 0.0 and 1.0. I contacted the instructor who again allowed me to modify my project to work around this mistake.
 
 # Lessons Learned
-
+1. My first lesson learned was that much preparation must go into a project proposal. My challenges were a result of too little data exploration and knowledge of methods. In the future, I will consider datasets carefully and properly document the exact columns of each dataset used in my proposed analysis.
+2. Data pipelines with multiple tools on multiple machines should be avoided. For this project, I used R Studio in a Docker container on my server to conduct preprocessing of census data and later for processing of ArcGIS output. Census tract polygons were copied from R Studio to ArcGIS Pro on my laptop for tabulation with land cover raster images. Then, the tabulations were copied back to R Studio for additional analysis. This back-and-forth between multiple machines and multiple applications should be avoided if possible. A purely-Spark data pipeline would have been even cleaner.
+3. Native libraries are a convenient black box with nice outputs. By implementing regression by-hand, I learned exactly what is going on behind the scenes of native functions. I also learned how much work is put into them to give useful outputs such as r-squared or RMSE.
+4. TODO
 
 # References
 - https://bookdown.org/ripberjt/qrmbook/introduction-to-multiple-regression.html
