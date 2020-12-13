@@ -1,10 +1,16 @@
-# Overview
 - EXAMPLE MAP HERE
+# Overview
 
 ## Context
 
 ## Interesting
 
+# Approach
+## Algorithms
+#### Multiple Linear Regression
+
+## Frameworks
+#### Apache Spark
 
 # Data sources
 * US Census American Community Survey [https://www.census.gov/programs-surveys/acs]
@@ -28,11 +34,15 @@
    2. Divide population estimate by tract area
    3. Rename columns for convenience
 4. Write population and road densities to CSV
+5. Test Linear Regression in R
+   1. By suggestion of the instructor, it was very useful to have known-valid values to validate my implementation later in Apache Spark.
 
-# Approach
-## Algorithms
+# Apache Spark - Steps Implemented
+1. Data Loading
+2. Data Joining
+3. Data 
 
-## Frameworks
+
 ## External tools and packages
 In this project, I further developed my knowledge of R to create my data pipeline. I chose R for this task because I am using it in another course this semester, and there are two very convienent packages authored by Kyle Walker:
 * tidycensus [https://walker-data.com/tidycensus/]
@@ -40,12 +50,15 @@ In this project, I further developed my knowledge of R to create my data pipelin
 These packages were instrumental in gathering Census data. Tidycensus is a convenient alternative to [data.census.gov](data.census.gov) and tigris is a similar package for spatial data from the US Census. 
 Another software essential to this project was ESRI's ArcGIS Pro. I used ArcGIS to tabulate raster image pixels by census tracts. This converted raster image data to counts of pixels as a CSV file.
 
-# Steps Implemented
-
 # Results
-## Map
+Prediction map here
 
 # Performance Evaluation
+- By-hand validation
+- RMSE?
+- Input data again?
+- Map visual inspection?
+- Matching census urban areas?
 
 # Aspects Desired
 ## Definitely will do
@@ -89,51 +102,4 @@ Here I will briefly describe the challenges encountered during this project.
 - https://medium.com/@talentorigin/creating-apache-spark-cluster-on-google-cloud-platform-gcp-9a5d8b9c0ffb
 - https://guides.github.com/features/mastering-markdown/
 
-# Code README
-
-
-
-
-
-
-
-
-
----
----
-
-You can use the [editor on GitHub](https://github.com/freezurbern/ITCS8190-CourseProject/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/freezurbern/ITCS8190-CourseProject/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Thank you.
