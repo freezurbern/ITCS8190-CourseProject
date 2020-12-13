@@ -10,12 +10,14 @@
 #### Multiple Linear Regression
 
 ## Frameworks
-#### Apache Spark
+I used the Google Cloud Platform's Dataproc service to host a Hadoop cluster. This service has 
+[multiple images](https://cloud.google.com/dataproc/docs/concepts/versioning/overview)
+for cluster VM nodes. I chose Dataproc 1.5, which includes Ubuntu 18.04 LTS, Hadoop 2.10, and Spark 2.4. It also runs Python 3, which was my primary motivation for choosing this image.
 
 # Data sources
-* US Census American Community Survey [https://www.census.gov/programs-surveys/acs]
-* US Census TIGER/LINE Shapefiles [https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html]
-* National Land Cover Database [https://www.mrlc.gov/data/nlcd-land-cover-conus-all-years]
+* [US Census American Community Survey](https://www.census.gov/programs-surveys/acs)
+* [US Census TIGER/LINE Shapefiles](https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html)
+* [National Land Cover Database](https://www.mrlc.gov/data/nlcd-land-cover-conus-all-years)
 
 # Data Pipeline / Tasks
 1. Download Census data for years 2011, 2013, 2016
@@ -39,7 +41,7 @@
 6. Upload data to Hadoop HDFS
    * ```freezurbern@cluster-95c6-m:/home/ubuntu$ hadoop fs -put lcpr2011.csv /user/root/lcpr2011.csv```
    * ```freezurbern@cluster-95c6-m:/home/ubuntu$ hadoop fs -put lcpr2013.csv /user/root/lcpr2013.csv```
-   * For Google Dataproc, upload the files following: https://cloud.google.com/compute/docs/instances/transfer-files?hl=en#transferbrowser
+   * For Google Dataproc, upload the files following their [tutorial](https://cloud.google.com/compute/docs/instances/transfer-files?hl=en#transferbrowser)
 
 # Apache Spark - Steps Implemented
 1. Data Loading
@@ -49,8 +51,8 @@
 
 ## External tools and packages
 In this project, I further developed my knowledge of R to create my data pipeline. I chose R for this task because I am using it in another course this semester, and there are two very convienent packages authored by Kyle Walker:
-* tidycensus [https://walker-data.com/tidycensus/]
-* tigris [https://github.com/walkerke/tigris]
+* [tidycensus](https://walker-data.com/tidycensus/)
+* [tigris](https://github.com/walkerke/tigris)
 These packages were instrumental in gathering Census data. Tidycensus is a convenient alternative to [data.census.gov](data.census.gov) and tigris is a similar package for spatial data from the US Census. 
 Another software essential to this project was ESRI's ArcGIS Pro. I used ArcGIS to tabulate raster image pixels by census tracts. This converted raster image data to counts of pixels as a CSV file.
 
@@ -58,7 +60,30 @@ Another software essential to this project was ESRI's ArcGIS Pro. I used ArcGIS 
 Prediction map here
 
 # Performance Evaluation
-- By-hand validation
+I evaluated the performance of my linear regression model first by manually calculating a prediction:
+```python
+betas = [0.9828573112718250737174230, 0.6322003963821229977071425, 4.0829155870278501794246040,
+         0.0187037366133609578300323,-0.9753240641474236749530746,-0.9734866562156101466030123,
+         -0.9760581738234358484262998]
+ex_feature = ['01003010500',
+              0.0093421030,
+              0.0002470766835,
+              0.01558030241,
+              0.00715161422,
+              0.501277074,
+              0.08065999183,
+              0.41091132]
+
+ex_y = ex_feature[7]
+ex_x = ex_feature[1:8]
+calc = beta[0] + (beta[1]*ex_x[0]) + (beta[2]*ex_x[1]) + (beta[3]*ex_x[2]) + (beta[4]*ex_x[3]) + (beta[5]*ex_x[4]) + (beta[6]*ex_x[5]) 
+print(calc)
+# 0.41637306722808143
+print(calc - ex_y)
+# 0.005461747228081404             
+```
+The result of this calculation is approximately +0.005, which shows my model overestimates the percent-urban by 0.5%. I find this result adequate but not inspiring, because 0.05% of a census tract (average size in my dataset is 2,436 acres) is **121 acres**. 
+
 - RMSE?
 - Input data again?
 - Map visual inspection?
@@ -87,8 +112,9 @@ Prediction map here
   * I did not accomplish this stretch-goal because Apache Spark does not have native support for raster image data, and my knowledge of the platform is not yet advanced enough to implement this myself.
 
 ## Unexpected accomplishments
-:green_circle: **Running my code on a Google Cloud Platform cluster**
-:green_circle: **Documenting projects on GitHub Pages**
+:heavy_check_mark: **Running my code on a Google Cloud Platform cluster**
+
+:heavy_check_mark: **Documenting projects on GitHub Pages**
 
 # Challenges
 Here I will briefly describe the challenges encountered during this project.
