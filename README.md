@@ -62,7 +62,7 @@ Prediction map here
 
 # Aspects Desired
 ## Definitely will do
-:white_check_mark: **Loading my data into Apache Spark**
+:heavy_check_mark: **Loading my data into Apache Spark**
  
 :white_check_mark: **Use the South East region of the United States**
 
