@@ -170,4 +170,8 @@ Here I will briefly describe the challenges encountered during this project.
 - https://medium.com/@talentorigin/creating-apache-spark-cluster-on-google-cloud-platform-gcp-9a5d8b9c0ffb
 - https://guides.github.com/features/mastering-markdown/
 
-Thank you.
+# Appendix
+# TODO CHANGE IMAGE SIZE - https://stackoverflow.com/questions/37534560/how-to-i-change-the-size-of-an-image-in-github-markdown
+<img src='https://raw.githubusercontent.com/freezurbern/ITCS8190-CourseProject/main/NLCD_Colour_Classification_Update.jpg'>
+
+# **Thank you.**
