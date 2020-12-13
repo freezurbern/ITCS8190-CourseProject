@@ -114,7 +114,11 @@ The result of this calculation is approximately +0.005, which shows my model ove
 ## Unexpected accomplishments
 :heavy_check_mark: **Running my code on a Google Cloud Platform cluster**
 
+:heavy_check_mark: **Loading data from a Google Cloud Storage Bucket**
+
 :heavy_check_mark: **Documenting projects on GitHub Pages**
+
+
 
 # Challenges
 Here I will briefly describe the challenges encountered during this project.
