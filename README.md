@@ -239,22 +239,24 @@ Briefly, here are the challenges encountered during this project.
 
 
 # References
-- [https://bookdown.org/ripberjt/qrmbook/introduction-to-multiple-regression.html]
-  * This resource was used to better understand the multiple linear regression problem as well as to serve as an example (in R)
-- PySpark Cheatsheet: [https://github.com/runawayhorse001/CheatSheet/blob/master/cheatSheet_pyspark.pdf]
-- Spark on Google Cloud Platform: [https://medium.com/@talentorigin/creating-apache-spark-cluster-on-google-cloud-platform-gcp-9a5d8b9c0ffb]
-- Documenting using Markdown: [https://guides.github.com/features/mastering-markdown/]
-- Calculating R Squared: [https://www.youtube.com/watch?v=w2FKXOa0HGA]
+- [Introduction to multiple regression](https://bookdown.org/ripberjt/qrmbook/introduction-to-multiple-regression.html)
+  * This resource was used to better understand the multiple linear regression problem as well as to serve as an example in R language
+- [PySpark Cheatsheet](https://github.com/runawayhorse001/CheatSheet/blob/master/cheatSheet_pyspark.pdf)
+- [Spark on Google Cloud Platform](https://medium.com/@talentorigin/creating-apache-spark-cluster-on-google-cloud-platform-gcp-9a5d8b9c0ffb)
+- [Documenting using Markdown](https://guides.github.com/features/mastering-markdown/)
+- [Calculating R Squared](https://www.youtube.com/watch?v=w2FKXOa0HGA)
 
 # Appendix
 
 ### 1. National Land Cover Database Legend
 
 <img src='https://raw.githubusercontent.com/freezurbern/ITCS8190-CourseProject/main/NLCD_Colour_Classification_Update.jpg' width='50%'>
+[source](https://www.mrlc.gov/data/legends/national-land-cover-database-2016-nlcd2016-legend)
 
 ### 2. Study Area
 
 <img src='https://raw.githubusercontent.com/freezurbern/ITCS8190-CourseProject/main/Roadways.jpg' width='100%'>
+This image was created in ArcGIS Pro for this project.
 
 ### 3. Docker Compose file for R Studio Server
 Access is provided at http://YOUR_IP:8787
