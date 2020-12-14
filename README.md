@@ -174,7 +174,7 @@ Briefly, here are the challenges encountered during this project.
 2. Data pipelines with multiple tools on multiple machines should be avoided. For this project, I used R Studio in a Docker container on my server to conduct preprocessing of census data and later for processing of ArcGIS output. Census tract polygons were copied from R Studio to ArcGIS Pro on my laptop for tabulation with land cover raster images. Then, the tabulations were copied back to R Studio for additional analysis. This back-and-forth between multiple machines and multiple applications should be avoided if possible. A purely-Spark data pipeline would have been even cleaner.
 3. Native libraries are a convenient black box with nice outputs. By implementing regression by-hand, I learned exactly what is going on behind the scenes of native functions. I also learned how much work is put into them to give useful outputs such as r-squared or RMSE.
 4. A job-gone-wrong can crash a Google Dataproc cluster. I painfully learned this lesson by asking for too much data to be returned in a Jupyter Notebook running on the single master node. Required rebooting the node.
-
+  - <img src='https://raw.githubusercontent.com/freezurbern/ITCS8190-CourseProject/main/504-gcp.png' width='50%'>
 
 
 
