@@ -123,8 +123,36 @@ print(calc - ex_y)
 The result of this calculation is approximately +0.005, which shows my model overestimates the percent-urban by 0.5%. I find this result adequate but not inspiring, because 0.05% of a census tract (average size in my dataset is 2,436 acres) is **121 acres**. 
 
 * **R-Squared**: I also implemented R-squared to calculate the goodness-of-fit of my prediction to my actual values. I have included a **limited** code snippet:
-```
+```python
+# calculate (y - yhat) ^2
+def dfM(v,m):
+    return math.pow((v - m), 2)
+uDFM = udf(dfM, DoubleType())
 
+def calcRsquared(inDATAFRAME):
+    # Calculate means
+    df_stats = dfPred.select(
+        _mean(col('urbany')).alias('ymean'),
+        [...]
+    ).collect()
+    # Add means as columns
+    tmpr2 = (dfPred.withColumn("ymean", lit(ymean))
+                   [...])
+
+    # Calc dist from means
+    tmpr2_ym = (tmpr2.withColumn("ymdist", uDFM('urbany', 'ymean'))
+                     [...])
+
+    r2_stats = tmpr2_ym.select(
+        _sum(col('yhmdist')).alias('numer'),
+        [...]
+    ).collect()
+
+    # divide actual y-value mean by lin reg estimated y-value mean
+    rsquared = [...]['numer'] / [...]['denom']
+
+    print(f"R-Squared is {rsquared}")
+    return rsquared   
 ```
 
 - Map visual inspection?
