@@ -11,6 +11,7 @@ My name is Zachery Slocum and this is the project summary page for my ITCS 8190 
 In this course project, I used multiple linear regression to model urban growth. The model formula is:
 ```
 Urban = Beta_0 + Beta_1*roadDens + Beta_2*popDens + Beta_3*barren + Beta_4*water + Beta_5*nature + Beta_6*agric
+
 Where
   Urban  = Dependent variable, percent of census tract's land cover urban
   Beta_0 = Y-intercept coefficient
@@ -51,7 +52,8 @@ for cluster VM nodes. I chose Dataproc 1.5, which includes Ubuntu 18.04 LTS, Had
    3. Rename columns for convenience
 4. Write population and road densities to CSV
 5. Test Linear Regression in R
-   1. By suggestion of the instructor, it was very useful to have known-valid values to validate my implementation later in Apache Spark.
+   * By suggestion of the instructor, it was very useful to have known-valid values to validate my implementation later in Apache Spark.
+   * ```cc.fit.2011 = glm(urbany ~ roaddens + popdens + barren + water + nature + agric , data = lcpr2011)```
 6. Upload data to Hadoop HDFS
    * ```freezurbern@cluster-95c6-m:/home/ubuntu$ hadoop fs -put lcpr2011.csv /user/root/lcpr2011.csv```
    * ```freezurbern@cluster-95c6-m:/home/ubuntu$ hadoop fs -put lcpr2013.csv /user/root/lcpr2013.csv```
@@ -69,10 +71,15 @@ for cluster VM nodes. I chose Dataproc 1.5, which includes Ubuntu 18.04 LTS, Had
    2. Loading coefficients from HDFS
    3. Adding coefficients as columns
    4. Computing dependent variable
+   5. Return DataFrame with input data and prediction
 3. Data Export
    1. Saving computed prediction to HDFS
-4. Searching and Plotting
-   1. TODO
+4. Calculate R-squared
+5. Searching and Plotting
+   1. Install geopandas on the Dataproc JupyterLab instance
+   2. Upload Census polygons to Google Cloud Storage bucket
+   3. Access bucket to load from shapefile
+   4. Plot!
 
 ## External tools and packages
 In this project, I further developed my knowledge of R to create my data pipeline. I chose R for this task because I am using it in another course this semester, and there are two very convienent packages authored by Kyle Walker:
@@ -174,9 +181,10 @@ Briefly, here are the challenges encountered during this project.
 # References
 - https://bookdown.org/ripberjt/qrmbook/introduction-to-multiple-regression.html
   * This resource was used to better understand the multiple linear regression problem as well as to serve as an example (in R)
-- https://github.com/runawayhorse001/CheatSheet/blob/master/cheatSheet_pyspark.pdf
-- https://medium.com/@talentorigin/creating-apache-spark-cluster-on-google-cloud-platform-gcp-9a5d8b9c0ffb
-- https://guides.github.com/features/mastering-markdown/
+- PySpark Cheatsheet: https://github.com/runawayhorse001/CheatSheet/blob/master/cheatSheet_pyspark.pdf
+- Spark on Google Cloud Platform: https://medium.com/@talentorigin/creating-apache-spark-cluster-on-google-cloud-platform-gcp-9a5d8b9c0ffb
+- Documenting using Markdown: https://guides.github.com/features/mastering-markdown/
+- Calculating R Squared: https://www.youtube.com/watch?v=w2FKXOa0HGA
 
 # Appendix
 
