@@ -239,12 +239,12 @@ Briefly, here are the challenges encountered during this project.
 
 
 # References
-- https://bookdown.org/ripberjt/qrmbook/introduction-to-multiple-regression.html
+- [https://bookdown.org/ripberjt/qrmbook/introduction-to-multiple-regression.html]
   * This resource was used to better understand the multiple linear regression problem as well as to serve as an example (in R)
-- PySpark Cheatsheet: https://github.com/runawayhorse001/CheatSheet/blob/master/cheatSheet_pyspark.pdf
-- Spark on Google Cloud Platform: https://medium.com/@talentorigin/creating-apache-spark-cluster-on-google-cloud-platform-gcp-9a5d8b9c0ffb
-- Documenting using Markdown: https://guides.github.com/features/mastering-markdown/
-- Calculating R Squared: https://www.youtube.com/watch?v=w2FKXOa0HGA
+- PySpark Cheatsheet: [https://github.com/runawayhorse001/CheatSheet/blob/master/cheatSheet_pyspark.pdf]
+- Spark on Google Cloud Platform: [https://medium.com/@talentorigin/creating-apache-spark-cluster-on-google-cloud-platform-gcp-9a5d8b9c0ffb]
+- Documenting using Markdown: [https://guides.github.com/features/mastering-markdown/]
+- Calculating R Squared: [https://www.youtube.com/watch?v=w2FKXOa0HGA]
 
 # Appendix
 
