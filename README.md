@@ -31,8 +31,11 @@ for cluster VM nodes. I chose Dataproc 1.5, which includes Ubuntu 18.04 LTS, Had
 
 # Data sources
 * [US Census American Community Survey](https://www.census.gov/programs-surveys/acs)
+  * Census tracts (with geometry). 5-year estimates of population Variable: B01003_001. Years: 2011, 2013, 2016. Num Features: 78,147 Size: 349MB
 * [US Census TIGER/LINE Shapefiles](https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html)
+  * Primary and Secondary Roads (geometry). Years: 2011, 2013, 2016. Num Features: (159,266 141,574 141,041) respectively. Size: 809MB
 * [National Land Cover Database](https://www.mrlc.gov/data/nlcd-land-cover-conus-all-years)
+  * Raster image datasets (30 meter by 30 meter resolution). Years: 2011, 2013, 2016. Size: 60GB
 
 # Data Pipeline / Tasks
 1. Download Census data for years 2011, 2013, 2016
@@ -88,13 +91,14 @@ In this project, I further developed my knowledge of R to create my data pipelin
 * [tigris](https://github.com/walkerke/tigris)
 
 These packages were instrumental in gathering Census data. Tidycensus is a convenient alternative to [data.census.gov](data.census.gov) and tigris is a similar package for spatial data from the US Census. 
+
 Another software essential to this project was ESRI's ArcGIS Pro. I used ArcGIS to tabulate raster image pixels by census tracts. This converted raster image data to counts of pixels as a CSV file.
 
 # Results
 TODO Prediction map here
 
 # Performance Evaluation
-I evaluated the performance of my linear regression model first by manually calculating a prediction:
+* **By-hand**: I evaluated the performance of my linear regression model first by manually calculating a prediction:
 ```python
 betas = [0.9828573112718250737174230, 0.6322003963821229977071425, 4.0829155870278501794246040,
          0.0187037366133609578300323,-0.9753240641474236749530746,-0.9734866562156101466030123,
@@ -118,7 +122,11 @@ print(calc - ex_y)
 ```
 The result of this calculation is approximately +0.005, which shows my model overestimates the percent-urban by 0.5%. I find this result adequate but not inspiring, because 0.05% of a census tract (average size in my dataset is 2,436 acres) is **121 acres**. 
 
-- RMSE?
+* **R-Squared**: I also implemented R-squared to calculate the goodness-of-fit of my prediction to my actual values. I have included a **limited** code snippet:
+```
+
+```
+
 - Map visual inspection?
 
 # Aspects Desired
@@ -150,7 +158,6 @@ The result of this calculation is approximately +0.005, which shows my model ove
 
 :heavy_check_mark: **Running my code on a Google Cloud Platform cluster**
 
-
 :heavy_check_mark: **Loading data from a Google Cloud Storage Bucket**
 
 :heavy_check_mark: **Documenting projects on GitHub Pages**
@@ -166,16 +173,19 @@ Briefly, here are the challenges encountered during this project.
    
 :warning: **Regression type**
 
-   - My second error in my project proposal was defining my research question and approach. I intended to implement logistic regression on Apache Spark to determine whether an area had experienced urban growth or not. After digging into the datasets, I found my urban variable was continuous between 0.0 and 1.0. I contacted the instructor who again allowed me to modify my project to work around this mistake.
+  - My second error in my project proposal was defining my research question and approach. I intended to implement logistic regression on Apache Spark to determine whether an area had experienced urban growth or not. After digging into the datasets, I found my urban variable was continuous between 0.0 and 1.0. I contacted the instructor who again allowed me to modify my project to work around this mistake.
 
+:warning: **Moving to the cloud** 
+  - Another issue I encountered was moving from local Spark development in a Jupyter Notebook to JupyterLab in the cloud. Not only was the storage medium different (local disk versus HDFS), commands took much longer to start executing. While my development pace was slowed by working in the cloud, I knew my code would work there because I could debug as I developed my scripts, not afterwards. 
 
 # Lessons Learned
-1. My first lesson learned was that much preparation must go into a project proposal. My challenges were a result of too little data exploration and knowledge of methods. In the future, I will consider datasets carefully and properly document the exact columns of each dataset used in my proposed analysis.
-2. Data pipelines with multiple tools on multiple machines should be avoided. For this project, I used R Studio in a Docker container on my server to conduct preprocessing of census data and later for processing of ArcGIS output. Census tract polygons were copied from R Studio to ArcGIS Pro on my laptop for tabulation with land cover raster images. Then, the tabulations were copied back to R Studio for additional analysis. This back-and-forth between multiple machines and multiple applications should be avoided if possible. A purely-Spark data pipeline would have been even cleaner.
-3. Native libraries are a convenient black box with nice outputs. By implementing regression by-hand, I learned exactly what is going on behind the scenes of native functions. I also learned how much work is put into them to give useful outputs such as r-squared or RMSE.
-4. A job-gone-wrong can crash a Google Dataproc cluster. I painfully learned this lesson by asking for too much data to be returned in a Jupyter Notebook running on the single master node. Required rebooting the node.
+1. My first lesson learned was that **much preparation must go into a project proposal**. My challenges were a result of too little data exploration and knowledge of methods. In the future, I will consider datasets carefully and properly document the exact columns of each dataset used in my proposed analysis.
+2. **Data pipelines with multiple tools on multiple machines should be avoided**. For this project, I used R Studio in a Docker container on my server to conduct preprocessing of census data and later for processing of ArcGIS output. Census tract polygons were copied from R Studio to ArcGIS Pro on my laptop for tabulation with land cover raster images. Then, the tabulations were copied back to R Studio for additional analysis. This back-and-forth between multiple machines and multiple applications should be avoided if possible. A purely-Spark data pipeline would have been even cleaner.
+3. **Native libraries are a convenient black box with detailed outputs**. By implementing regression by-hand, I learned exactly what is going on behind the scenes of native functions. I also learned how much work is put into them to give useful outputs such as r-squared or RMSE.
+  - Example: https://spark.apache.org/docs/latest/ml-classification-regression.html#linear-regression
+4. **A job-gone-wrong can crash a Google Dataproc cluster**. I painfully learned this lesson by asking for too much data to be returned in a Jupyter Notebook running on the single master node. Required rebooting the nodes.
   - <img src='https://raw.githubusercontent.com/freezurbern/ITCS8190-CourseProject/main/504-gcp.png' width='50%'>
-
+5. **Store code separately from data in the cloud.** This is related to the previous lesson. One should store code separately (i.e. no code in HDFS!) in a place safe from cluster crashes. One should be able to completely re-initialize a cluster from scratch and lose no progress on their data analysis. 
 
 
 # References
