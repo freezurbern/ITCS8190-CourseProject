@@ -1,13 +1,11 @@
 TODO EXAMPLE MAP HERE
 
 # Overview
+My name is Zachery Slocum and this is the project summary page for my ITCS 8190 course project. In this project, I succeeded in conducting multiple linear regression in a Hadoop / Apache Spark cluster running on Google Cloud Platform. My project was the application of regression towards predicting urban growth based on land cover and census demographic data.
 
+* **Context**: I chose to use my course project as an opportunity to learn more about Apache Spark and statistics and their interaction with geospatial research. I am a Ph.D. student in the Department of Geography at UNC Charlotte taking an advanced computer science course (ITCS 8190) because I want to bring computer science methods to Geographic Information Science (GIS). My background before GIS was web development as a computer science undergraduate at UNC Charlotte. I felt this project would be an easy introduction to the intersection of cloud computing and GIS, but was surprised and overwhelmed by the complexity involved. While I have learned a weighty tome of information about cloud computing this semester, I still have a lot of work ahead to understand the entire scope of this exciting topic.
 
-* **Context**
-I chose to use my course project as an opportunity to learn more about Apache Spark and statistics and their interaction with geospatial research. I am a Ph.D. student in the Department of Geography at UNC Charlotte taking an advanced computer science course (ITCS 8190) because I want to bring computer science methods to Geographic Information Science (GIS). My background before GIS was web development as a computer science undergraduate at UNC Charlotte. I felt this project would be an easy introduction to the intersection of cloud computing and GIS, but was surprised and overwhelmed by the complexity involved. While I have learned a weighty tome of information about cloud computing this semester, I still have a lot of work ahead to understand the entire scope of this exciting topic.
-
-* **Interesting**
-The most interesting aspect of this project is the distributed training and prediction of a multiple linear regression model using Apache Spark. Also of interest is the data preparation incorporating land cover and demographic data. 
+* **Interesting**: The most interesting aspect of this project is the distributed training and prediction of a multiple linear regression model using Apache Spark. Also of interest is the data preparation incorporating land cover and demographic data. 
 
 # Approach
 In this course project, I used multiple linear regression to model urban growth. The model formula is:
@@ -25,7 +23,7 @@ Where
   agric = ((Pasture + Crops) landcover pixels / total pixels in census tract)
 ```
 
-## Frameworks
+# Frameworks
 I used the Google Cloud Platform's Dataproc service to host a Hadoop cluster. This service has 
 [multiple images](https://cloud.google.com/dataproc/docs/concepts/versioning/overview)
 for cluster VM nodes. I chose Dataproc 1.5, which includes Ubuntu 18.04 LTS, Hadoop 2.10, and Spark 2.4. It also runs Python 3, which was my primary motivation for choosing this image.
@@ -78,8 +76,10 @@ for cluster VM nodes. I chose Dataproc 1.5, which includes Ubuntu 18.04 LTS, Had
 
 ## External tools and packages
 In this project, I further developed my knowledge of R to create my data pipeline. I chose R for this task because I am using it in another course this semester, and there are two very convienent packages authored by Kyle Walker:
+
 * [tidycensus](https://walker-data.com/tidycensus/)
 * [tigris](https://github.com/walkerke/tigris)
+
 These packages were instrumental in gathering Census data. Tidycensus is a convenient alternative to [data.census.gov](data.census.gov) and tigris is a similar package for spatial data from the US Census. 
 Another software essential to this project was ESRI's ArcGIS Pro. I used ArcGIS to tabulate raster image pixels by census tracts. This converted raster image data to counts of pixels as a CSV file.
 
@@ -119,7 +119,8 @@ The result of this calculation is approximately +0.005, which shows my model ove
 
 :heavy_check_mark: **Loading my data into Apache Spark**
  
-:heavy_check_mark: **Use the South East region of the United States**
+:heavy_check_mark: **Analyze the South East region of the United States**
+  * See Appendix 2 at the end of this page
 
 :heavy_check_mark: **Implementing multiple linear regression in Apache Spark**
 
@@ -142,6 +143,7 @@ The result of this calculation is approximately +0.005, which shows my model ove
 
 :heavy_check_mark: **Running my code on a Google Cloud Platform cluster**
 
+
 :heavy_check_mark: **Loading data from a Google Cloud Storage Bucket**
 
 :heavy_check_mark: **Documenting projects on GitHub Pages**
@@ -150,11 +152,14 @@ The result of this calculation is approximately +0.005, which shows my model ove
 
 
 # Challenges
-Here I will briefly describe the challenges encountered during this project.
-**1. Unit of Analysis**
-   - My project proposal described my unit of analysis as a raster image pixel. This was ultimately impractical due to Apache Spark's affinity for matricies and tables. With the gracious permission of the instructor, I was able to move to census tracts as my primary unit. Census tracts are given a unique GEOID primary key by the Census which is consistent through time and datasets.
-**2. Regression type**
+Briefly, here are the challenges encountered during this project.
+:warning: **Unit of Analysis**
+  - My project proposal described my unit of analysis as a raster image pixel. This was ultimately impractical due to Apache Spark's affinity for matricies and tables. With the gracious permission of the instructor, I was able to move to census tracts as my primary unit. Census tracts are given a unique GEOID primary key by the Census which is consistent through time and datasets.
+   
+:warning: **Regression type**
+
    - My second error in my project proposal was defining my research question and approach. I intended to implement logistic regression on Apache Spark to determine whether an area had experienced urban growth or not. After digging into the datasets, I found my urban variable was continuous between 0.0 and 1.0. I contacted the instructor who again allowed me to modify my project to work around this mistake.
+
 
 # Lessons Learned
 1. My first lesson learned was that much preparation must go into a project proposal. My challenges were a result of too little data exploration and knowledge of methods. In the future, I will consider datasets carefully and properly document the exact columns of each dataset used in my proposed analysis.
