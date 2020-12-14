@@ -153,6 +153,7 @@ The result of this calculation is approximately +0.005, which shows my model ove
 
 # Challenges
 Briefly, here are the challenges encountered during this project.
+
 :warning: **Unit of Analysis**
   - My project proposal described my unit of analysis as a raster image pixel. This was ultimately impractical due to Apache Spark's affinity for matricies and tables. With the gracious permission of the instructor, I was able to move to census tracts as my primary unit. Census tracts are given a unique GEOID primary key by the Census which is consistent through time and datasets.
    
