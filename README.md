@@ -1,4 +1,4 @@
-TODO EXAMPLE MAP HERE
+<img src='https://raw.githubusercontent.com/freezurbern/ITCS8190-CourseProject/main/gpd-predict-2011.png' width='100%'>
 
 # Overview
 My name is Zachery Slocum and this is the project summary page for my ITCS 8190 course project. In this project, I succeeded in conducting multiple linear regression in a Hadoop / Apache Spark cluster running on Google Cloud Platform. My project was the application of regression towards predicting urban growth based on land cover and census demographic data.
@@ -62,6 +62,8 @@ for cluster VM nodes. I chose Dataproc 1.5, which includes Ubuntu 18.04 LTS, Had
    * ```freezurbern@cluster-95c6-m:/home/ubuntu$ hadoop fs -put lcpr2013.csv /user/root/lcpr2013.csv```
    * For Google Dataproc, upload the files following their [tutorial](https://cloud.google.com/compute/docs/instances/transfer-files?hl=en#transferbrowser)
 
+
+
 # Apache Spark - Steps Implemented
 1. Data Loading
    1. After uploading to HDFS, using spark to read CSV
@@ -90,7 +92,7 @@ In this project, I further developed my knowledge of R to create my data pipelin
 * [tidycensus](https://walker-data.com/tidycensus/)
 * [tigris](https://github.com/walkerke/tigris)
 
-These packages were instrumental in gathering Census data. Tidycensus is a convenient alternative to [data.census.gov](data.census.gov) and tigris is a similar package for spatial data from the US Census. 
+These packages were instrumental in gathering Census data. Tidycensus is a convenient alternative to [data.census.gov](data.census.gov) and tigris is a similar package for spatial data from the US Census. I utilized R Studio Server in a Docker container for reproducibile environments. Please see Appendix item 3 below for the Docker Compose script.
 
 Another software essential to this project was ESRI's ArcGIS Pro. I used ArcGIS to tabulate raster image pixels by census tracts. This converted raster image data to counts of pixels as a CSV file.
 
@@ -163,7 +165,7 @@ def calcRsquared(inDATAFRAME):
 :heavy_check_mark: **Loading my data into Apache Spark**
  
 :heavy_check_mark: **Analyze the South East region of the United States**
-  * See Appendix 2 at the end of this page
+  * See Appendix 2 at the end of this page for a map of states, census tracts, and major roadways
 
 :heavy_check_mark: **Implementing multiple linear regression in Apache Spark**
 
@@ -233,6 +235,31 @@ Briefly, here are the challenges encountered during this project.
 ### 2. Study Area
 
 <img src='https://raw.githubusercontent.com/freezurbern/ITCS8190-CourseProject/main/Roadways.jpg' width='100%'>
+
+### 3. Docker Compose file for R Studio Server
+Access is provided at http://YOUR_IP:8787
+```
+version: "3.7"
+services:
+  rocker:
+    image: rocker/geospatial:4.0.2
+    container_name: rocker
+    restart: "no"
+    ports:
+      - "8888:8888"
+      - "8484:8484"
+      - "8787:8787"
+    environment:
+    - ROOT=TRUE
+    - PASSWORD=rocker
+    - DISABLE_AUTH=true
+    - USERID=1000
+    - GROUPID=1000
+    - UMASK=022
+    volumes:
+    - /opt/cc-rstudio/rnb:/home/rstudio/rnb
+```
+
 
 
 # **Thank you.**
