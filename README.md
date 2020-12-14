@@ -1,9 +1,14 @@
 <img src='https://raw.githubusercontent.com/freezurbern/ITCS8190-CourseProject/main/gpd-predict-2011.png' width='100%'>
 
 # Overview
-My name is Zachery Slocum and this is the project summary page for my ITCS 8190 course project. In this project, I succeeded in conducting multiple linear regression in a Hadoop / Apache Spark cluster running on Google Cloud Platform. My project was the application of regression towards predicting urban growth based on land cover and census demographic data.
+This is the project summary page for my ITCS 8190 course project. In this project, I succeeded in conducting multiple linear regression in a Hadoop / Apache Spark cluster running on Google Cloud Platform. My project was the application of regression towards predicting urban growth based on land cover and census demographic data. The unit of analysis is census tracts. Data for this project was retrieved from the 
+[US Census Bureau](https://www.census.gov/) 
+and the 
+[Multi-Resolution Land Characteristics (MRLC) Consortium](https://www.mrlc.gov/).
 
-* **Context**: I chose to use my course project as an opportunity to learn more about Apache Spark and statistics and their interaction with geospatial research. I am a Ph.D. student in the Department of Geography at UNC Charlotte taking an advanced computer science course (ITCS 8190) because I want to bring computer science methods to Geographic Information Science (GIS). My background before GIS was web development as a computer science undergraduate at UNC Charlotte. I felt this project would be an easy introduction to the intersection of cloud computing and GIS, but was surprised and overwhelmed by the complexity involved. While I have learned a weighty tome of information about cloud computing this semester, I still have a lot of work ahead to understand the entire scope of this exciting topic.
+* **Context**: I chose to use my course project as an opportunity to learn more about 
+[Apache Spark](https://spark.apache.org/) 
+and statistics and their interaction with geospatial research. I am a Ph.D. student in the Department of Geography at UNC Charlotte taking an advanced computer science course (ITCS 8190) because I want to bring computer science methods to Geographic Information Science (GIS). My background before GIS was web development as a computer science undergraduate at UNC Charlotte. I felt this project would be an easy introduction to the intersection of cloud computing and GIS, but was surprised and overwhelmed by the complexity involved. While I have learned a weighty tome of information about cloud computing this semester, I still have a lot of work ahead to understand the entire scope of this exciting topic.
 
 * **Interesting**: The most interesting aspect of this project is the distributed training and prediction of a multiple linear regression model using Apache Spark. Also of interest is the data preparation incorporating land cover and demographic data. 
 
@@ -25,7 +30,7 @@ Where
 ```
 
 # Frameworks
-I used the Google Cloud Platform's Dataproc service to host a Hadoop cluster. This service has 
+I used the [Google Cloud Platform Dataproc service](https://cloud.google.com/dataproc) to host a Hadoop cluster. This service has 
 [multiple images](https://cloud.google.com/dataproc/docs/concepts/versioning/overview)
 for cluster VM nodes. I chose Dataproc 1.5, which includes Ubuntu 18.04 LTS, Hadoop 2.10, and Spark 2.4. It also runs Python 3, which was my primary motivation for choosing this image.
 
@@ -97,10 +102,24 @@ These packages were instrumental in gathering Census data. Tidycensus is a conve
 Another software essential to this project was ESRI's ArcGIS Pro. I used ArcGIS to tabulate raster image pixels by census tracts. This converted raster image data to counts of pixels as a CSV file.
 
 # Results
-TODO Prediction map here
+These maps are plots from [GeoPandas](https://geopandas.org/) after joining the prediction output with census tract polygons. They were generated on a single node on the cluster. While not distributed, they provide a non-scientific visual cue of prediction results. One can compare my map outputs to the 
+[US Population from the Census](https://commons.wikimedia.org/wiki/File:US_population_map.png) 
+to find I was able to accurately model urban areas. The map looks as expected, higher values at urban areas: 
+<img src='https://raw.githubusercontent.com/freezurbern/ITCS8190-CourseProject/main/gpd-predict-2011.png' width='100%'>
+<img src='https://raw.githubusercontent.com/freezurbern/ITCS8190-CourseProject/main/gpd-predict-nc-2011.png' width='100%'>
+
+I also wanted to check if there was variation in my prediction results based on population or landcover. For example, are my predictions less accurate in extremely rural areas? To test this visually, I plotted the difference between actual and predicted (`c16p11['diff'] = c16p11['urbany'] - c16p11['cy'] `):
+
+<img src='https://github.com/freezurbern/ITCS8190-CourseProject/blob/main/gpd-diff-2011.png?raw=true' width='100%'>
+
+Also included is a Pandas DataFrame with the actual column `urbany` and the predicted column `cy`:
+
+<img src='https://github.com/freezurbern/ITCS8190-CourseProject/blob/main/pandas-pred-2011.png?raw=true' width='100%'>
+
 
 # Performance Evaluation
-* **By-hand**: I evaluated the performance of my linear regression model first by manually calculating a prediction:
+* **Manual calculation**: I evaluated the performance of my linear regression model first by manually calculating a prediction:
+
 ```python
 betas = [0.9828573112718250737174230, 0.6322003963821229977071425, 4.0829155870278501794246040,
          0.0187037366133609578300323,-0.9753240641474236749530746,-0.9734866562156101466030123,
@@ -122,9 +141,12 @@ print(calc)
 print(calc - ex_y)
 # 0.005461747228081404             
 ```
+
 The result of this calculation is approximately +0.005, which shows my model overestimates the percent-urban by 0.5%. I find this result adequate but not inspiring, because 0.05% of a census tract (average size in my dataset is 2,436 acres) is **121 acres**. 
 
-* **R-Squared**: I also implemented R-squared to calculate the goodness-of-fit of my prediction to my actual values. I have included a **limited** code snippet:
+* **R-Squared**: I also implemented R-squared to calculate the goodness-of-fit of my prediction to my actual values. For 2011 data, I have an R-squared value of `0.9831`. R-squared represents the percent of variance captured by the model out of the total variance. A value of 0.98 is a pleasant surprise, given my inexperience with Spark.
+
+I have included a **limited** code snippet of calculating R-squared:
 ```python
 # calculate (y - yhat) ^2
 def dfM(v,m):
@@ -156,8 +178,6 @@ def calcRsquared(inDATAFRAME):
     print(f"R-Squared is {rsquared}")
     return rsquared   
 ```
-
-- Map visual inspection?
 
 # Aspects Desired
 ## Definitely will do
