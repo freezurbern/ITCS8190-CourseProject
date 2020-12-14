@@ -173,9 +173,13 @@ Here I will briefly describe the challenges encountered during this project.
 - https://guides.github.com/features/mastering-markdown/
 
 # Appendix
-### National Land Cover Database Legend
+
+### 1. National Land Cover Database Legend
+
 <img src='https://raw.githubusercontent.com/freezurbern/ITCS8190-CourseProject/main/NLCD_Colour_Classification_Update.jpg' width='50%'>
-### Study Area
+
+### 2. Study Area
+
 <img src='https://raw.githubusercontent.com/freezurbern/ITCS8190-CourseProject/main/Roadways.jpg' width='100%'>
 
 
