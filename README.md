@@ -67,8 +67,6 @@ for cluster VM nodes. I chose Dataproc 1.5, which includes Ubuntu 18.04 LTS, Had
    * ```freezurbern@cluster-95c6-m:/home/ubuntu$ hadoop fs -put lcpr2013.csv /user/root/lcpr2013.csv```
    * For Google Dataproc, upload the files following their [tutorial](https://cloud.google.com/compute/docs/instances/transfer-files?hl=en#transferbrowser)
 
-
-
 # Apache Spark - Steps Implemented
 1. Data Loading
    1. After uploading to HDFS, using spark to read CSV
@@ -183,17 +181,22 @@ def calcRsquared(inDATAFRAME):
 ## Definitely will do
 
 :heavy_check_mark: **Loading my data into Apache Spark**
- 
+  * Please refer to the Python files in my CANVAS submission
+
 :heavy_check_mark: **Analyze the South East region of the United States**
   * See Appendix 2 at the end of this page for a map of states, census tracts, and major roadways
 
 :heavy_check_mark: **Implementing multiple linear regression in Apache Spark**
+  * See Apache Spark section above
 
 :heavy_check_mark: **Train a model**
+  * See Apache Spark section above
 
 :heavy_check_mark: **Predict urban growth**
+  * See Results section above
 
 :heavy_check_mark: **Export and map the predicted urban growth**
+  * See Results section above
 
 ## Likely will do
 :x:	**Use data across the entire United States**
@@ -211,9 +214,6 @@ def calcRsquared(inDATAFRAME):
 :heavy_check_mark: **Loading data from a Google Cloud Storage Bucket**
 
 :heavy_check_mark: **Documenting projects on GitHub Pages**
-
-
-
 
 # Challenges
 Briefly, here are the challenges encountered during this project.
