@@ -113,7 +113,6 @@ The result of this calculation is approximately +0.005, which shows my model ove
 
 - RMSE?
 - Map visual inspection?
-- Matching census urban areas?
 
 # Aspects Desired
 ## Definitely will do
@@ -161,7 +160,10 @@ Here I will briefly describe the challenges encountered during this project.
 1. My first lesson learned was that much preparation must go into a project proposal. My challenges were a result of too little data exploration and knowledge of methods. In the future, I will consider datasets carefully and properly document the exact columns of each dataset used in my proposed analysis.
 2. Data pipelines with multiple tools on multiple machines should be avoided. For this project, I used R Studio in a Docker container on my server to conduct preprocessing of census data and later for processing of ArcGIS output. Census tract polygons were copied from R Studio to ArcGIS Pro on my laptop for tabulation with land cover raster images. Then, the tabulations were copied back to R Studio for additional analysis. This back-and-forth between multiple machines and multiple applications should be avoided if possible. A purely-Spark data pipeline would have been even cleaner.
 3. Native libraries are a convenient black box with nice outputs. By implementing regression by-hand, I learned exactly what is going on behind the scenes of native functions. I also learned how much work is put into them to give useful outputs such as r-squared or RMSE.
-4. TODO
+4. A job-gone-wrong can crash a Google Dataproc cluster. I painfully learned this lesson by asking for too much data to be returned in a Jupyter Notebook running on the single master node. Required rebooting the node.
+
+
+
 
 # References
 - https://bookdown.org/ripberjt/qrmbook/introduction-to-multiple-regression.html
@@ -171,7 +173,10 @@ Here I will briefly describe the challenges encountered during this project.
 - https://guides.github.com/features/mastering-markdown/
 
 # Appendix
-# TODO CHANGE IMAGE SIZE - https://stackoverflow.com/questions/37534560/how-to-i-change-the-size-of-an-image-in-github-markdown
-<img src='https://raw.githubusercontent.com/freezurbern/ITCS8190-CourseProject/main/NLCD_Colour_Classification_Update.jpg'>
+### National Land Cover Database Legend
+<img src='https://raw.githubusercontent.com/freezurbern/ITCS8190-CourseProject/main/NLCD_Colour_Classification_Update.jpg' width='50%'>
+### Study Area
+<img src='https://raw.githubusercontent.com/freezurbern/ITCS8190-CourseProject/main/Roadways.jpg' width='100%'>
+
 
 # **Thank you.**
