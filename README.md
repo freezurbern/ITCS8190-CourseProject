@@ -10,7 +10,7 @@ and the
 [Apache Spark](https://spark.apache.org/) 
 and statistics and their interaction with geospatial research. I am a Ph.D. student in the Department of Geography at UNC Charlotte taking an advanced computer science course (ITCS 8190) because I want to bring computer science methods to Geographic Information Science (GIS). My background before GIS was web development as a computer science undergraduate at UNC Charlotte. I felt this project would be an easy introduction to the intersection of cloud computing and GIS, but was surprised and overwhelmed by the complexity involved. While I have learned a weighty tome of information about cloud computing this semester, I still have a lot of work ahead to understand the entire scope of this exciting topic.
 
-* **Interesting**: The most interesting aspect of this project is the distributed training and prediction of a multiple linear regression model using Apache Spark. Also of interest is the data preparation incorporating land cover and demographic data. 
+* **Interesting**: The most interesting aspect of this project is the distributed prediction of a multiple linear regression model using Apache Spark. Also of interest is the data preparation incorporating land cover and demographic data. 
 
 # Approach
 In this course project, I used multiple linear regression to model urban growth. The model formula is:
