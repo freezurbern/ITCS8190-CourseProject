@@ -4,13 +4,13 @@
 This is the project summary page for my ITCS 8190 course project. In this project, I succeeded in conducting multiple linear regression in a Hadoop / Apache Spark cluster running on Google Cloud Platform. My project was the application of regression towards predicting urban growth based on land cover and census demographic data. The unit of analysis is census tracts. Data for this project was retrieved from the 
 [US Census Bureau](https://www.census.gov/) 
 and the 
-[Multi-Resolution Land Characteristics (MRLC) Consortium](https://www.mrlc.gov/).
+[Multi-Resolution Land Characteristics (MRLC) Consortium](https://www.mrlc.gov/). My presentation has been attached below in the Appendix.
 
 * **Context**: I chose to use my course project as an opportunity to learn more about 
 [Apache Spark](https://spark.apache.org/) 
 and statistics and their interaction with geospatial research. I am a Ph.D. student in the Department of Geography at UNC Charlotte taking an advanced computer science course (ITCS 8190) because I want to bring computer science methods to Geographic Information Science (GIS). My background before GIS was web development as a computer science undergraduate at UNC Charlotte. I felt this project would be an easy introduction to the intersection of cloud computing and GIS, but was surprised and overwhelmed by the complexity involved. While I have learned a weighty tome of information about cloud computing this semester, I still have a lot of work ahead to understand the entire scope of this exciting topic.
 
-* **Interesting**: The most interesting aspect of this project is the distributed prediction of a multiple linear regression model using Apache Spark. Also of interest is the data preparation incorporating land cover and demographic data. 
+* **Interesting**: The most interesting aspect of this project is the distributed prediction of a multiple linear regression model using Apache Spark. Also of interest is the data preparation incorporating land cover and demographic data. I attempted to predict **growth** by using 2011 data for my independent variables, and 2016 data for my dependent variables. My line of thinking was that I could map indicators of future growth (population, roads, landcover) to an increase seen later in landcover.
 
 # Approach
 In this course project, I used multiple linear regression to model urban growth. The model formula is:
@@ -66,6 +66,9 @@ for cluster VM nodes. I chose Dataproc 1.5, which includes Ubuntu 18.04 LTS, Had
    * ```freezurbern@cluster-95c6-m:/home/ubuntu$ hadoop fs -put lcpr2011.csv /user/root/lcpr2011.csv```
    * ```freezurbern@cluster-95c6-m:/home/ubuntu$ hadoop fs -put lcpr2013.csv /user/root/lcpr2013.csv```
    * For Google Dataproc, upload the files following their [tutorial](https://cloud.google.com/compute/docs/instances/transfer-files?hl=en#transferbrowser)
+7. Run model using independent variables from 2011 and dependent variable from 2016
+8. Predict using independent variables from 2013 and dependent variable from 2016
+
 
 # Apache Spark - Steps Implemented
 1. Data Loading
@@ -226,17 +229,25 @@ Briefly, here are the challenges encountered during this project.
   - My second error in my project proposal was defining my research question and approach. I intended to implement logistic regression on Apache Spark to determine whether an area had experienced urban growth or not. After digging into the datasets, I found my urban variable was continuous between 0.0 and 1.0. I contacted the instructor who again allowed me to modify my project to work around this mistake.
 
 :warning: **Moving to the cloud** 
-  - Another issue I encountered was moving from local Spark development in a Jupyter Notebook to JupyterLab in the cloud. Not only was the storage medium different (local disk versus HDFS), commands took much longer to start executing. While my development pace was slowed by working in the cloud, I knew my code would work there because I could debug as I developed my scripts, not afterwards. 
+  - Another issue I encountered was moving from local Spark development in a Jupyter Notebook to JupyterLab in the cloud. Not only was the storage medium different (local disk versus HDFS), commands took much longer to start executing in the cloud. While my development pace was slowed by working in the cloud, I knew my code would work there because I could debug as I developed my scripts, not afterwards. 
+  
+:warning: **Understanding of statistics**
+  - This project demonstrated I have much to learn about linear algebra, matrices, and algorithms. I believe most of my mistakes in this course were due to my lack of understanding about the mathematics behind techniques covered. I expect to further my understanding in later courses focused on these statistical topics.
 
 # Lessons Learned
 1. My first lesson learned was that **much preparation must go into a project proposal**. My challenges were a result of too little data exploration and knowledge of methods. In the future, I will consider datasets carefully and properly document the exact columns of each dataset used in my proposed analysis.
+
 2. **Data pipelines with multiple tools on multiple machines should be avoided**. For this project, I used R Studio in a Docker container on my server to conduct preprocessing of census data and later for processing of ArcGIS output. Census tract polygons were copied from R Studio to ArcGIS Pro on my laptop for tabulation with land cover raster images. Then, the tabulations were copied back to R Studio for additional analysis. This back-and-forth between multiple machines and multiple applications should be avoided if possible. A purely-Spark data pipeline would have been even cleaner.
+
 3. **Native libraries are a convenient black box with detailed outputs**. By implementing regression by-hand, I learned exactly what is going on behind the scenes of native functions. I also learned how much work is put into them to give useful outputs such as r-squared or RMSE.
   - Example: https://spark.apache.org/docs/latest/ml-classification-regression.html#linear-regression
+
 4. **A job-gone-wrong can crash a Google Dataproc cluster**. I painfully learned this lesson by asking for too much data to be returned in a Jupyter Notebook running on the single master node. Required rebooting the nodes.
   - <img src='https://raw.githubusercontent.com/freezurbern/ITCS8190-CourseProject/main/504-gcp.png' width='50%'>
+
 5. **Store code separately from data in the cloud.** This is related to the previous lesson. One should store code separately (i.e. no code in HDFS!) in a place safe from cluster crashes. One should be able to completely re-initialize a cluster from scratch and lose no progress on their data analysis. 
 
+6. **Split data within the same year** In this project, I split my training and testing data by year (2011 and 2013) instead of within the same years. The professor made an excellent point that I'm being unfair to this model by training on 2011 and testing on 2013 when I should have used an 80%/20% train/test spplit within a year. I have used this method in previous experiences with machine learning, but did not realize it would be useful for multiple linear regression as well. I will look into this using Spark's 'sample' function.
 
 # References
 - [Introduction to multiple regression](https://bookdown.org/ripberjt/qrmbook/introduction-to-multiple-regression.html)
@@ -282,6 +293,8 @@ services:
     - /opt/cc-rstudio/rnb:/home/rstudio/rnb
 ```
 
-
+### 4. Presentation to the Professor
+This PDF includes fixes suggested by the professor, including documenting from which year each column comes from.
+[Revised Presentation PDF](https://github.com/freezurbern/ITCS8190-CourseProject/blob/main/RevisedPresentation.pdf)
 
 # **Thank you.**
